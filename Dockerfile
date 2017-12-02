@@ -1,7 +1,4 @@
 FROM node:latest
-RUN curl -I -vvvv https://registry.npm.taobao.org \
- && apt-get update \
- && apt-get install dnsutils \
- && dig registry.npm.taobao.org \
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN printf "nameserver 223.5.5.5\nnameserver 223.6.6.6\n" > /etc/resolv.conf \
+ && npm install -g cnpm --registry=https://registry.npm.taobao.org
 CMD [ "cnpm" ]
